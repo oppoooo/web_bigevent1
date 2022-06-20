@@ -70,11 +70,14 @@ $('#form_login').submit( e => {
         url: url + '/api/login',
         data: $('#form_login').serialize(), // 将表单中的内容拼接成字符串型的参数
         success: res => {
-            console.log(res);
-            if (status !== 0) layer.msg(res.message)
+            // console.log(res);
+            if (res.status !== 0) return layer.msg(res.message)
             layer.msg('登录成功')
+            localStorage.setItem('token', res.token)  // token是res的一个属性
             location.href = '/index.html'
         }
     })
 
 })
+
+// 退出
